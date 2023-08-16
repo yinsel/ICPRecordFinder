@@ -10,6 +10,7 @@ pip install -r requirements.txt
 
 ```cmd
 cd redis
+redis-server
 ```
 
 - 运行代理池
