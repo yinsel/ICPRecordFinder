@@ -12,7 +12,7 @@ domains = []
 
 
 def get_proxy():
-    return requests.get("http://127.0.0.1:5010/get?type=https").json()
+    return requests.get("http://127.0.0.1:5010/get/").json()
 
 
 def delete_proxy(proxy):
@@ -22,13 +22,13 @@ def delete_proxy(proxy):
 async def fetch_url(session, url):
     retry_count = 5
     proxy = get_proxy().get("proxy")
-    while retry_count > 1:
+    while retry_count > 0:
         try:
             async with session.get(url, headers=header, proxy=f"http://{proxy}") as response:
                 print(url)
                 return await response.text()
         except Exception:
-            retry_count = -1
+            retry_count -= 1 
     delete_proxy(proxy)
     return None
 
