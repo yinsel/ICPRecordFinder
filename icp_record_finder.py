@@ -29,6 +29,7 @@ async def fetch_url(session, url):
                 return await response.text()
         except Exception:
             retry_count = -1
+    delete_proxy(proxy)
     return None
 
 
